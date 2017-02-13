@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Save my current directory
+#save my current directory
 my_cwd=$(pwd)
 
 #creating staging directory
@@ -19,6 +19,11 @@ unzip medicare_data.zip
 
 #Create our hdfs directory
 hdfs dfs -mkdir /user/w205/hospital_compare
+hdfs dfs -mkdir /user/w205/hospital_compare/hospitals
+hdfs dfs -mkdir /user/w205/hospital_compare/effective_care
+hdfs dfs -mkdir /user/w205/hospital_compare/readmissions
+hdfs dfs -mkdir /user/w205/hospital_compare/measures
+hdfs dfs -mkdir /user/w205/hospital_compare/survey_responses
 
 #remove fist line of files and rename
 Old_File1="Hospital General Information.csv"
