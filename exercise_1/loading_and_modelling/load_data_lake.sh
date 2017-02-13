@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#save my current directory
+#Save my current directory
 my_cwd=$(pwd)
 
 #creating staging directory
@@ -42,11 +42,11 @@ New_File5="survey_responses.csv"
 tail -n +2 "$Old_File5" > $New_File5
 
 #copy the file to hdfs
-hdfs dfs -put $New_File1 /user/w205/hospital_compare
-hdfs dfs -put $New_File2 /user/w205/hospital_compare
-hdfs dfs -put $New_File3 /user/w205/hospital_compare
-hdfs dfs -put $New_File4 /user/w205/hospital_compare
-hdfs dfs -put $New_File5 /user/w205/hospital_compare
+hdfs dfs -put $New_File1 /user/w205/hospital_compare/hospitals
+hdfs dfs -put $New_File2 /user/w205/hospital_compare/effective_care
+hdfs dfs -put $New_File3 /user/w205/hospital_compare/readmissions
+hdfs dfs -put $New_File4 /user/w205/hospital_compare/measures
+hdfs dfs -put $New_File5 /user/w205/hospital_compare/survey_responses
 
 #change directory back to the original
 cd $my_cwd
