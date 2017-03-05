@@ -1,0 +1,18 @@
+Question 3: procedures have the greatest variability between hospitals?
+
+We are using the same measures outlined in question 1 to understand procedural performance variability between hospitals.  Again, we are only evaluating 6 of the 8 conditions for the reasons outlined above.
+
+Condition   Average_Condition_Score  SD_Condition_Score
+Cataract surgery outcome	85.14035087719299	29.2661343094838
+Colonoscopy care	79.9287980260839	24.50305252578068
+Heart Attack or Chest Pain	71.22222222222223	21.4550923478395
+Emergency Department	25.83152468800868	18.218145009983544
+Preventive Care	91.78580201424711	13.297617535445715
+Blood Clot Prevention and Treatment	93.08953168044077	11.08936777918874
+
+
+
+
+
+
+
