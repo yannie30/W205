@@ -4,8 +4,8 @@ select
 	ProviderID as Provider_ID,
 	MeasureID as Measure_ID,
 	ComparedtoNational as Compared_to_National,
-	cast(Score as decimal(1,0)) as Measure_Score,
-	cast(Denominator as decimal(1,0)) as Measure_Sample,
+	Score as Measure_Score,
+	cast(Denominator as double) as Measure_Sample,
 	cast(
 		concat (substr(MeasureStartDate, 7,4),
 		'-',
