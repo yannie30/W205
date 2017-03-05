@@ -1,0 +1,28 @@
+Question 1: What hospitals are of high quality care
+Approach:
+	We did not include any readmissions measures because it would be tough to normalize the data to measure hospital quality.  Since general patient health could impact these measures, it would be unfair to compare readmission rates at hospitals in states where obesity is above the national average (for example) to hospitals in states that are culturally more health concious.  As such, we decided not to use readmissions as a measure of high quality care.
+	In the effective care data, measure IDs are categorized into 8 conditions.  We considered 6 of these conditions in the analysis, choosing one measure for each condition that we thought would be a good proxy for understanding hospital quality.  We decided to leave out two conditions Elective Delivery and Thrombolytic Therapy, because there was only one measure for each condition, and we weren't sure how to interprate the results.  In the real world, I would want to work closely with an expert who has deep knowledge and understanding of the measures to choose the appropriate ones.
+	We chose one measure ID to represent each of the 6 conditions we're evaluating.  Since there was a varying number of measures per condition, we hope to normalize weighting so each condition counted equally in our evaluation of the hospital.  The condition/measures we used for analysis are:
+	- Preventive Care(measure_id = IMM_2): *influenza immunization*
+	- Heart Attack or Chest Pain(measure_id = OP_2): *fibrinolytic therapy received within 30 minutes of ED arrival*
+	- Emergency Department(measure_id = OP_20): Median Time from ED arrival to provider contact for ED patients
+	- Colonoscopy care(measure_id = OP_29): *Appropriate follow up interval for normal colonoscopy in average risk patients*
+	- Cataract surgery outcome(measure_id = OP_31): *percent of patients aged 18 years and older who had cataract surgery and had improvement in visual function achieved withint 90 days following surgery*
+	- Blood Clot Prevention and Treatment: *enous thromboembolism warfarin therapy dicharge instructions*
+	For each of the measures outlined above, we stack ranked each hospital's rating based on the hospital's performance amongst its peers for that measure.  Since there were varying values for each score, we thought this methodology would normalize the values to make sure each measure was equally weighted.  For the measures labeled with an *, hospitals with higher scores were given a higher rank because higher scores were interprated as indicators of higher quality care.  However, for the "median time from ED arrival to provider contact for ED patients" measure, hospitals with lower scores were considered better since the hospital was more attentive to their patients.  The range of this measure was 0-575, so we assume this is counted in some measure of time.  We made sure to ensure rank value was null if there was no score for that measure to keep the data clean.
+	After getting a rank for each measure for each hospital, we calculated the average rank and the standard deviation of each hospital and used that value to measure overall quality.  We decided not to apply a weight the measures to favor one over others, but would consider doing so if an expert had suggested it.
+	To look at the best hospitals, we ended up looking at hospitals for which we had data for at least two measures.
+
+Findings:
+
+Provider_ID  Hospital_Name  State  Mean_Rank  SD_Rank  Measure_Count
+390307	EDGEWOOD SURGICAL HOSPITAL	PA	184.0	258.8010819142764	3
+261320	LAFAYETTE REGIONAL HEALTH CENTER	MO	386.6666666666667	545.4150305552237	3
+190177	LAKEVIEW REGIONAL MEDICAL CENTER	LA	386.6666666666667	545.4150305552237	3
+260214	BELTON REGIONAL MEDICAL CENTER	MO	386.6666666666667	545.4150305552237	3
+050726	STANISLAUS SURGICAL HOSPITAL	CA	403.0	568.5138520739843	3
+370229	ALLIANCEHEALTH SEMINOLE	OK	452.6666666666667	638.7531256718479	3
+010045	FAYETTE MEDICAL CENTER	AL	470.3333333333333	663.7375652737726	3
+050232	FRENCH HOSPITAL MEDICAL CENTER	CA	470.3333333333333	663.7375652737726	3
+450340	SAN ANGELO COMMUNITY MEDICAL CENTER	TX	489.3333333333333	690.6076229588615	3
+010158	RUSSELLVILLE HOSPITAL	AL	489.3333333333333	690.6076229588615	3
