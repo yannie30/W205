@@ -3,11 +3,14 @@ Question 4: Are average scores for hospital quality or procedural variability co
 For this question, we compared the Overall Rating of Hospital PerformanceRate variable from Survey responses to different hospital quality/procedural variability measure.  We decided that this variable should reflect the patient's overall experience with the hospital and was the best variable to use.  We didn't find any significant correllation between patient survey responses and hospital quality/procedural variable.
 
 Hospital quality and patient survey responses:
-We evaluated this using two different metrics:
+We evaluated this using three different metrics:
 -First, we looked at hospital quality (as determined in question 1) using average rank.  Overall, we found a correlation of -0.2507091967301986
 -Second, we looked at mean measure score (not rank) for the 6 conditions outlined in question 1.  We did not transform any of the variables in this case.  Here we found a very weak correlation of 0.11656383225808956.
+-Third (in the hospitals_and_patients2.sql file), we compared survey responses to the overall hospital ratings available in the original hospitals file and found significant correlation (0.5924884498114988).  If I had more time, I would dig into our methodology and try to understand why we’re getting such different results.
 
 Hospital variability and patient survey responses:
 We interprated hospital variability to mean the variability in procedural/condition score for a single hospital, compared to patient survey responses.  So, if a hospital had a very high variance, it would mean they are really good at treating some conditions and not so good at treating others.  Overall, we found a very weak negative correlation of -0.07005319686020871.
 
 The second file also explores correlation between survey responses and measures that include median time.  The question I wanted to answer was if waiting times was correlated with customer experience.  We saw weak correlation here as well.
+
+
