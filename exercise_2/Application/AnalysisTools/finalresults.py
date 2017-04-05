@@ -52,4 +52,4 @@ elif num_arguements == 1:
 else:
     print 'Not a valid number of arguements'
 
-
+conn.close()

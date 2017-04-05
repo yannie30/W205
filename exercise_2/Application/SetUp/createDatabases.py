@@ -26,3 +26,5 @@ cur.execute('''CREATE TABLE tweetwordcount
        (word TEXT PRIMARY KEY     NOT NULL,
        count INT     NOT NULL);''')
 conn.commit()
+
+print "Success! The database and table have been set up"
