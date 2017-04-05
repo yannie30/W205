@@ -29,26 +29,10 @@ def singleArguement(argument1):
    	print "Total number of occurances of \"" + argument1 + "\":", num_occurance
     conn.commit()
 
-def doubleArguement(argument1, argument2):
-    diff = int(argument2) - int(argument1) + 1
-    for counter in range(diff):
-    	count = counter + int(argument1)
-        cur.execute("SELECT word, count from tweetwordcount WHERE count=%s", (count,))
-    	records = cur.fetchall()
-    	for rec in records:
-    	    print str(rec[0]) + ":", str(rec[1])
-        conn.commit()
-
 if num_arguements == 0:
     noArguement()
 elif num_arguements == 1:
-    arguements = sys.argv[1].split(",")
-    if len(arguements) == 1:
-        singleArguement(arguements[0])
-    elif len(arguements) == 2:
-        doubleArguement(arguements[0], arguements[1])
-    else:
-        print "Arguments invalid"
+    singleArguement(sys.argv[1])
 else:
     print 'Not a valid number of arguements'
 
