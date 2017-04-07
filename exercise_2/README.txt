@@ -2,6 +2,8 @@ These instructions assume:
 * You are running an instance of AMI Name: UCB MIDS W205 EX2-FULL (AMI ID: ami-d4dd4ec3), with correct security/port settings.  This assumes hadoop is already started since it is apart of the start up script.
 * You are using an EBS setup in lab 2, so that hadoop and postgres have already been set up
 * You already have Twitter Credentials
+* You are using Python 2.7 with tweet.py installed
+* You have installed Psycopg2 version 2.6.2
 
 -----------------------steps-----------------------
 * Start your instance using the normal start up process (running code from the AWS interface to connect to your instance)
