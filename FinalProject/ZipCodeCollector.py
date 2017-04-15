@@ -92,7 +92,6 @@ today_year = datetime.date.today().year
 today_month = datetime.date.today().month
 today_day = datetime.date.today().day
 today = str(today_year) +"," + str(today_month) +"," + str(today_day)
-print today
 num_arguements = len(sys.argv) -1
 
 #connect to the database
@@ -119,15 +118,15 @@ def updateTable(zipcode, pos_number, neg_number):
     conn.commit()
 
 for positiveresult in pos_results.items():
-    print "positive result"
     zipcode = positiveresult[0]
     pos_number = positiveresult[1]
+    print "positive tweet in", zipcode
     updateTable(zipcode, pos_number, 0)
 
 for negativeresult in neg_results.items():
-    print "negative result"
     zipcode = negativeresult[0]
     neg_number = negativeresult[1]
+    print "negative tweet in", zipcode
     updateTable(zipcode, 0, neg_number)
 
 conn.close()
