@@ -90,7 +90,7 @@ today = today_year +"," +today_month +"," + today_day
 num_arguements = len(sys.argv) -1
 
 #connect to the database
-conn = psycopg2.connect(database="FinalProject", user="postgres", password="pass", host="localhost", port="5432")
+conn = psycopg2.connect(database="finalProject", user="postgres", password="pass", host="localhost", port="5432")
 cur = conn.cursor()
 
 #save results to database
@@ -101,7 +101,7 @@ def updateTable(zipcode, pos_number, neg_number):
     pos_record_count=0
     neg_record_count=0
     cur.execute("SELECT RecordDate, Location, PosTweets, NegTweets FROM Sentiment WHERE RecordDate=%s AND Location= %s", (today,zipcode))
-        records = cur.fetchall()
+    records = cur.fetchall()
     for rec in records:
         pos_record_count = rec[2]
         neg_record_count = rec[3]
