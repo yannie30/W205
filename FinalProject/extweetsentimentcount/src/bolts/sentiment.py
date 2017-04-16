@@ -8,27 +8,29 @@ from nltk.classify import NaiveBayesClassifier
 
 class TweetSentimentAnalyzer(Bolt):
 
-    training = []
+    def initialize(self):
+        
+        self.training = []
 
-    #defining funciton to format sentences
-    def format_sentence(sent):
-        return({word: True for word in nltk.word_tokenize(sent)})
+        #defining funciton to format sentences
+        def format_sentence(sent):
+            return({word: True for word in nltk.word_tokenize(sent)})
 
-    #import positive sentiment data
-    with open("/root/W205 GIT/W205/FinalProject/extweetsentimentcount/src/bolts/pos_tweets.txt") as f:
-        for i in f:
-            training.append([format_sentence(i), 'pos'])
+        #import positive sentiment data
+        with open("/root/W205 GIT/W205/FinalProject/extweetsentimentcount/src/bolts/pos_tweets.txt") as f:
+            for i in f:
+                self.training.append([format_sentence(i), 'pos'])
 
-    #import negative sentiment data
-    with open("/root/W205 GIT/W205/FinalProject/extweetsentimentcount/src/bolts/neg_tweets.txt") as f:
-        for i in f:
-            training.append([format_sentence(i), 'neg'])
+        #import negative sentiment data
+        with open("/root/W205 GIT/W205/FinalProject/extweetsentimentcount/src/bolts/neg_tweets.txt") as f:
+            for i in f:
+                self.training.append([format_sentence(i), 'neg'])
 
     
     def process(self, tup):
         tweet = tup.values[0]  # extract the tweet
         
-        classifier = NaiveBayesClassifier.train(training)
+        classifier = NaiveBayesClassifier.train(self.training)
 
         # Split the tweet into words
         #words = tweet.split()
