@@ -46,7 +46,7 @@ class TweetSentimentAnalyzer(Bolt):
         # Split the tweet into words
         #words = tweet.split()
         sentiment = []
-        sentiment = classifier.classify(format_sentence(tweet))
+        sentiment.append(classifier.classify(format_sentence(tweet)))
 
         # Filter out the hash tags, RT, @ and urls
         #valid_words = []
