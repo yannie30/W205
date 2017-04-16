@@ -6,12 +6,6 @@ import nltk
 from nltk.classify import NaiveBayesClassifier
 
 
-
-################################################################################
-# NLTK Functions
-################################################################################
-
-
 class TweetSentimentAnalyzer(Bolt):
     training = []
 
@@ -44,5 +38,7 @@ class TweetSentimentAnalyzer(Bolt):
 
         # Emit all the words
         self.emit(sentiment)
+
+        self.log('%s' % (sentiment))
 
         # tuple acknowledgement is handled automatically
