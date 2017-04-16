@@ -5,7 +5,6 @@ import tweepy, copy
 import Queue, threading
 import csv
 
-
 from streamparse.spout import Spout
 
 ################################################################################
@@ -17,11 +16,6 @@ twitter_credentials = {
     "access_token"        :  "843619900023226368-6nYCTJwnQSjospaZgZutk7A17JxmpPt",
     "access_token_secret" :  "zkmMJGaFxDenRQOsX5pwmfaomjz5CgPupY7fX1sCmWlU2",
 }
-
-def auth_get(auth_key):
-    if auth_key in twitter_credentials:
-        return twitter_credentials[auth_key]
-    return None
 
 def auth_get(auth_key):
     if auth_key in twitter_credentials:
