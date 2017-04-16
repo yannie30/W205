@@ -14,7 +14,7 @@ class SaveToDataBase(Bolt):
         self.pos_counts = Counter()
         self.neg_counts = Counter()
 	#create a connection for this instance
-	self.conn = psycopg2.connect(database="FinalProject", user="postgres", password="pass", host="localhost", port="5432")
+	self.conn = psycopg2.connect(database="finalproject", user="postgres", password="pass", host="localhost", port="5432")
 
     def process(self, tup):
         sentiment = tup.values[0]
