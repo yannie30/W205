@@ -30,7 +30,7 @@ class SaveToDataBase(Bolt):
         record_count =0
         pos_record_count=0
         neg_record_count=0
-        cur.execute("SELECT Date, Location, PosTweets, NegTweets FROM Sentiment WHERE Date=%s AND Location= %s", (date,"US"))
+        cur.execute("SELECT RecordDate, Location, PosTweets, NegTweets FROM Sentiment WHERE RecordDate=%s AND Location= %s", (date,"US"))
         records = cur.fetchall()
 
         for rec in records:
@@ -40,19 +40,19 @@ class SaveToDataBase(Bolt):
         
         if sentiment == "pos":
             if record_count == 0:
-                cur.execute("INSERT INTO Sentiment (Date, Location, PosTweets, NegTweets) VALUES (%s, %s, %s, %s)", (date,"US", 1, 0))
+                cur.execute("INSERT INTO Sentiment (RecordDate, Location, PosTweets, NegTweets) VALUES (%s, %s, %s, %s)", (date,"US", 1, 0))
             else:
-                cur.execute("UPDATE Sentiment SET PosTweets=%s WHERE Date=%s AND Location=%s", (pos_record_count + 1, date, "US"))
+                cur.execute("UPDATE Sentiment SET PosTweets=%s WHERE RecordDate=%s AND Location=%s", (pos_record_count + 1, date, "US"))
             self.conn.commit()
             self.pos_counts[date] += 1
             self.emit([date, "US", 1,0])
             
         else:
             if record_count == 0:
-                cur.execute("INSERT INTO Sentiment (Date, Location, PosTweets, NegTweets) VALUES (%s, %s, %s, %s)", (date,"US", 0, 1))
+                cur.execute("INSERT INTO Sentiment (RecordDate, Location, PosTweets, NegTweets) VALUES (%s, %s, %s, %s)", (date,"US", 0, 1))
                 self.conn.commit()
             else:
-                cur.execute("UPDATE Sentiment SET NegTweets=%s WHERE Date=%s AND Location=%s", (neg_record_count + 1, date, "US"))
+                cur.execute("UPDATE Sentiment SET NegTweets=%s WHERE RecordDate=%s AND Location=%s", (neg_record_count + 1, date, "US"))
             self.conn.commit()
             self.neg_counts[date] += 1
             self.emit([date, "US", 0,1])
