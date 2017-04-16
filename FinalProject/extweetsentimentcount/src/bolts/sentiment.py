@@ -8,13 +8,14 @@ from nltk.classify import NaiveBayesClassifier
 
 class TweetSentimentAnalyzer(Bolt):
 
+    #defining funciton to format sentences
+    def format_sentence(sent):
+        return({word: True for word in nltk.word_tokenize(sent)})
+
     def initialize(self, conf, ctx):
         
         self.training = []
 
-        #defining funciton to format sentences
-        def format_sentence(sent):
-            return({word: True for word in nltk.word_tokenize(sent)})
 
         #import positive sentiment data
         with open("/root/W205 GIT/W205/FinalProject/extweetsentimentcount/src/bolts/pos_tweets.txt") as f:
