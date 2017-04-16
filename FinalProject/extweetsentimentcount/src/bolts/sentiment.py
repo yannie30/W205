@@ -10,8 +10,7 @@ from nltk.classify import NaiveBayesClassifier
 ################################################################################
 # NLTK Functions
 ################################################################################
-neg = []
-pos = []
+training = []
 
 #defining funciton to format sentences
 def format_sentence(sent):
@@ -20,22 +19,14 @@ def format_sentence(sent):
 #import positive sentiment data
 with open("/root/W205 GIT/W205/FinalProject/extweetsentimentcount/src/bolts/pos_tweets.txt") as f:
     for i in f:
-        pos.append([format_sentence(i), 'pos'])
+        training.append([format_sentence(i), 'pos'])
 
 #import negative sentiment data
 with open("/root/W205 GIT/W205/FinalProject/extweetsentimentcount/src/bolts/neg_tweets.txt") as f:
     for i in f:
-        neg.append([format_sentence(i), 'neg'])
+        training.append([format_sentence(i), 'neg'])
 
-training = pos[:int((.9)*len(pos))] + neg[:int((.9)*len(neg))]
-test = pos[int((.1)*len(pos)):] + neg[int((.1)*len(neg)):]
 classifier = NaiveBayesClassifier.train(training)
-
-################################################################################
-# Function to check if the string contains only ascii chars
-################################################################################
-def ascii_string(s):
-  return all(ord(c) < 128 for c in s)
 
 class TweetSentimentAnalyzer(Bolt):
 
@@ -47,29 +38,6 @@ class TweetSentimentAnalyzer(Bolt):
         #words = tweet.split()
         sentiment = []
         sentiment.append(classifier.classify(format_sentence(tweet)))
-
-        # Filter out the hash tags, RT, @ and urls
-        #valid_words = []
-        #for word in words:
-
-            # Filter the hash tags
-            #if word.startswith("#"): continue
-
-            # Filter the user mentions
-            #if word.startswith("@"): continue
-
-            # Filter out retweet tags
-            #if word.startswith("RT"): continue
-
-            # Filter out the urls
-            #if word.startswith("http"): continue
-
-            # Strip leading and lagging punctuations
-            #aword = word.strip("\"?><,'.:;)")
-
-            # now check if the word contains only ascii
-            #if len(aword) > 0 and ascii_string(word):
-            #    valid_words.append([aword])
 
         if not sentiment: return
 

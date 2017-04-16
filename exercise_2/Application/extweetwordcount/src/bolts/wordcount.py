@@ -11,7 +11,8 @@ class WordCounter(Bolt):
 
     def initialize(self, conf, ctx):
         self.counts = Counter()
-	#create a connection for this instance
+	
+    #create a connection for this instance
 	self.conn = psycopg2.connect(database="tcount", user="postgres", password="pass", host="localhost", port="5432")
 
     def process(self, tup):
