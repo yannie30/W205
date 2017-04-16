@@ -94,6 +94,8 @@ today_day = datetime.date.today().day
 today = str(today_year) +"-" + str(today_month) +"-" + str(today_day)
 num_arguements = len(sys.argv) -1
 
+
+
 #connect to the database
 
 

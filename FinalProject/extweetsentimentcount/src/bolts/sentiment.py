@@ -3,6 +3,9 @@ from __future__ import absolute_import, print_function, unicode_literals
 import re
 from streamparse.bolt import Bolt
 import nltk
+from nltk.classify import NaiveBayesClassifier
+
+
 
 ################################################################################
 # NLTK Functions
@@ -26,6 +29,7 @@ with open("neg_tweets.txt") as f:
 
 training = pos[:int((.9)*len(pos))] + neg[:int((.9)*len(neg))]
 test = pos[int((.1)*len(pos)):] + neg[int((.1)*len(neg)):]
+classifier = NaiveBayesClassifier.train(training)
 
 ################################################################################
 # Function to check if the string contains only ascii chars
@@ -36,7 +40,8 @@ def ascii_string(s):
 class TweetSentimentAnalyzer(Bolt):
 
     def process(self, tup):
-        tweet = tup[1].values[0]  # extract the tweet
+        tweet = tup[1]  # extract the tweet
+        
 
         # Split the tweet into words
         #words = tweet.split()

@@ -23,24 +23,6 @@ def auth_get(auth_key):
         return twitter_credentials[auth_key]
     return None
 
-################################################################################
-# ZipCode File Upload
-################################################################################
-#update this with list of zip codes
-zipCode = ["94105"]
-
-zipToLatLong = {}
-with open('ZipCodeLookup.csv', mode='r') as infile:
-    reader = csv.reader(infile)
-    for row in reader:
-        zipToLatLong[row[0]]= row[1]
-
-def findLatLong(zip):
-    try:
-        return zipToLatLong[zip]
-    except:
-        return None
-
 
 ################################################################################
 # Class to listen and act on the incoming tweets
@@ -96,7 +78,8 @@ class Tweets(Spout):
             tweet = self.queue().get(timeout = 0.1) 
             if tweet:
                 self.queue().task_done()
-                self.emit([datetime.date.today(), tweet])
+                today =
+                self.emit(str(datetime.date.today().year) + "-" + str(datetime.date.today().month) + "-" + str(datetime.date.today().day), tweet.text])
  
         except Queue.Empty:
             self.log("Empty queue exception ")
