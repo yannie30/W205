@@ -4,6 +4,7 @@ from collections import Counter
 from streamparse.bolt import Bolt
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+import datetime
 
 
 
@@ -16,11 +17,8 @@ class SaveToDataBase(Bolt):
 	self.conn = psycopg2.connect(database="FinalProject", user="postgres", password="pass", host="localhost", port="5432")
 
     def process(self, tup):
-        sentiment = tup[1].values[0]
-        date_year = tup[0].year
-        date_month = tup[0].month
-        date_day = tup[0].day
-        date = date_year +"," +date_month +"," + date_day
+        sentiment = tup.values[0]
+        date = str(datetime.date.today().year) + "-" +str(datetime.date.today().month) + "-" + str(datetime.date.today().day)
         
         # Write codes to increment the word count in Postgres
         # Use psycopg to interact with Postgres

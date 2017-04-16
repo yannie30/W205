@@ -40,7 +40,7 @@ def ascii_string(s):
 class TweetSentimentAnalyzer(Bolt):
 
     def process(self, tup):
-        tweet = tup[1]  # extract the tweet
+        tweet = tup.values[0]  # extract the tweet
         
 
         # Split the tweet into words
@@ -74,6 +74,6 @@ class TweetSentimentAnalyzer(Bolt):
         if not sentiment: return
 
         # Emit all the words
-        self.emit(tup[0], sentiment)
+        self.emit(sentiment)
 
         # tuple acknowledgement is handled automatically

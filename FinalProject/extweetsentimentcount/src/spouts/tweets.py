@@ -4,7 +4,7 @@ import itertools, time
 import tweepy, copy 
 import Queue, threading
 import csv
-import datetime
+
 
 from streamparse.spout import Spout
 
@@ -78,8 +78,7 @@ class Tweets(Spout):
             tweet = self.queue().get(timeout = 0.1) 
             if tweet:
                 self.queue().task_done()
-                today =
-                self.emit(str(datetime.date.today().year) + "-" + str(datetime.date.today().month) + "-" + str(datetime.date.today().day), tweet.text])
+                self.emit(tweet])
  
         except Queue.Empty:
             self.log("Empty queue exception ")
