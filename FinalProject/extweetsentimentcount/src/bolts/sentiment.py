@@ -7,6 +7,7 @@ from nltk.classify import NaiveBayesClassifier
 
 
 class TweetSentimentAnalyzer(Bolt):
+
     training = []
 
     #defining funciton to format sentences
@@ -23,11 +24,11 @@ class TweetSentimentAnalyzer(Bolt):
         for i in f:
             training.append([format_sentence(i), 'neg'])
 
-    classifier = NaiveBayesClassifier.train(training)
     
     def process(self, tup):
         tweet = tup.values[0]  # extract the tweet
         
+        classifier = NaiveBayesClassifier.train(training)
 
         # Split the tweet into words
         #words = tweet.split()

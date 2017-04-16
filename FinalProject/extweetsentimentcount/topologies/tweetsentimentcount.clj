@@ -8,7 +8,7 @@
     {"tweet-spout" (python-spout-spec
           options
           "spouts.tweets.Tweets"
-          ["date" "tweet"]
+          ["tweet"]
           :p 3
           )
     }
@@ -17,12 +17,12 @@
           options
           {"tweet-spout" :shuffle}
           "bolts.sentiment.TweetSentimentAnalyzer"
-          ["date" "sentiment"]
+          ["sentiment"]
           :p 3
           )
      "save-to-db-bolt" (python-bolt-spec
           options
-          {"tweet-sentiment-analyzer-bolt" ["date" "sentiment"]}
+          {"tweet-sentiment-analyzer-bolt" ["sentiment"]}
           "bolts.save_to_datebase.SaveToDataBase"
           ["date" "US" "pos_tweets" "neg_tweets"]
           :p 2
