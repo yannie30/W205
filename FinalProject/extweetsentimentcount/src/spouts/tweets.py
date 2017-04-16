@@ -92,5 +92,3 @@ def ack(self, tup_id):
     
     def fail(self, tup_id):
         pass  # if a tuple fails to process, do nothing
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
