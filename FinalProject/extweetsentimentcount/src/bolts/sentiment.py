@@ -8,7 +8,7 @@ from nltk.classify import NaiveBayesClassifier
 
 class TweetSentimentAnalyzer(Bolt):
 
-    def initialize(self):
+    def initialize(self, conf, ctx):
         
         self.training = []
 
@@ -25,6 +25,7 @@ class TweetSentimentAnalyzer(Bolt):
         with open("/root/W205 GIT/W205/FinalProject/extweetsentimentcount/src/bolts/neg_tweets.txt") as f:
             for i in f:
                 self.training.append([format_sentence(i), 'neg'])
+
 
     
     def process(self, tup):
