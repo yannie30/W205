@@ -7,6 +7,7 @@ import nltk
 from nltk.classify import NaiveBayesClassifier
 import datetime
 import time
+import numpy as np
 
 #####getting rid of ssl security warnings#####
 import requests.packages.urllib3
@@ -37,12 +38,12 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 def TweetsinZip(query, date, listOfZips):
-    returnThis = []
     print query, date, listOfZips
+    returnThis = []
     for Zip in listOfZips:
         if findLatLong(Zip) != None:
             LatLong = findLatLong(Zip)+",1mi"
-            searched_tweets = api.search(q = query, lang="en", count=1, geocode = LatLong, result_type='recent', until = date)
+            searched_tweets = api.search(q = query, lang="en", count=100, geocode = LatLong, result_type='recent', until = date)
             for tweet in searched_tweets:
                 returnThis.append([Zip,tweet])
     return returnThis
@@ -121,8 +122,18 @@ def updateTable(zipcode, pos_number, neg_number):
 while True:
     conn = psycopg2.connect(database="finalproject", user="postgres", password="pass", host="localhost", port="5432")
     cur = conn.cursor()
-    pos_results, neg_results = searchAndAnalyze(sys.argv[1], today, sys.argv[2].split(","))
-    
+    cur.execute("SELECT zip from final limit 50")
+    records=cur.fetchall()
+    i=0
+    zips=[]
+    ind_zip=np.random.choice(50, 3, replace=False)
+    for rec in records:
+        if ((i==ind_zip)*1).sum()==1:
+            zips.append(str(rec[0]))
+        i+=1
+    pos_results, neg_results = searchAndAnalyze("trump OR jobs", today, zips)
+    print zips  
+  
     #save results to database
     for positiveresult in pos_results.items():
         zipcode = positiveresult[0]
