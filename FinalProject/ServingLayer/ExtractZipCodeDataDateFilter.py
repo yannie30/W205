@@ -1,9 +1,3 @@
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "94105","90025","00000"
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "all"
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "top25"
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "bottom25"
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "top25bottom25"
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "baseline"
 
 import sys
 import psycopg2
@@ -11,10 +5,12 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 import csv
 
 
-def pull_data_by_zip(path, zips):
+def pull_data_by_zip(path, zips, dates):
     #connect to the database
     conn = psycopg2.connect(database="finalproject", user="postgres", password="pass", host="localhost", port="5432")
     cur = conn.cursor()
+    start_date = dates[0]
+    end_date = dates[1]
     path_ext = ""
     
     if zips[0] == "all":
@@ -67,7 +63,7 @@ def pull_data_by_zip(path, zips):
         record_count=0
         
         #pull data
-        cur.execute("SELECT RecordDate, Location, PosTweets, NegTweets from Sentiment WHERE Location=%s", (zip, ))
+        cur.execute("SELECT RecordDate, Location, PosTweets, NegTweets from Sentiment WHERE Location=%s AND recorddate >= %s and recorddate < %s", (zip, start_date, end_date))
         records = cur.fetchall()
         
         #check to see if there were results
@@ -82,7 +78,7 @@ def pull_data_by_zip(path, zips):
                 print_this.append(rec)
 
 
-    with open(path + 'ExtractZipCodeData_'+ path_ext +'.csv', 'wb') as csvfile:
+    with open(path + 'ExtractZipCodeDataDateFilter_'+ path_ext +'.csv', 'wb') as csvfile:
         filewriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
         filewriter.writerow(["Date","Location","Positive_Tweets", "Negative_Tweets"])
         for rec in print_this:
@@ -93,13 +89,12 @@ def pull_data_by_zip(path, zips):
 
 #figure out the number of arguments
 num_arguements = len(sys.argv) -1
-if num_arguements == 2:
+if num_arguements == 3:
     Path = sys.argv[1]
     Zips = sys.argv[2].split(",")
-    pull_data_by_zip(Path, Zips)
+    Dates = sys.argv[3].split(",")
+    pull_data_by_zip(Path, Zips, Dates)
     print "Your file has been saved"
 else :
-    print "Please enter the output path for the first argument and a list of zip codes as comma separated strings as the second argument (example - \"94105\",\"94105\",\"94105\"), or use \"all\", \"top25\", \"bottom25\", \"top25bottom25\", or \"baseline\""
-
-
+    print "Please enter the output path for the first argument, a list of zip codes as comma separated strings as the second argument (example - \"94105\",\"94105\",\"94105\"), or use \"all\", \"top25\", \"bottom25\", \"top25bottom25\", or \"baseline\".  The third argument should be a two dates starting from the first date, but not including the second date."
 
