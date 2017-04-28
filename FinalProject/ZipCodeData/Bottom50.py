@@ -122,7 +122,7 @@ def updateTable(zipcode, pos_number, neg_number):
 while True:
     conn = psycopg2.connect(database="finalproject", user="postgres", password="pass", host="localhost", port="5432")
     cur = conn.cursor()
-    cur.execute("SELECT zip from final limit 50")
+    cur.execute("SELECT zip from sum_pay_change94_14 limit 50")
     records=cur.fetchall()
     i=0
     zips=[]

@@ -17,12 +17,12 @@ class TweetSentimentAnalyzer(Bolt):
             return({word: True for word in nltk.word_tokenize(sent)})
 
         #import positive sentiment data
-        with open("/root/W205 GIT/W205/FinalProject/extweetsentimentcount/src/bolts/pos_tweets.txt") as f:
+        with open("/root/w205/FinalProject/extweetsentimentcount/src/bolts/pos_tweets.txt") as f:
             for i in f:
                 self.training.append([format_sentence(i), 'pos'])
 
         #import negative sentiment data
-        with open("/root/W205 GIT/W205/FinalProject/extweetsentimentcount/src/bolts/neg_tweets.txt") as f:
+        with open("/root/w205/FinalProject/extweetsentimentcount/src/bolts/neg_tweets.txt") as f:
             for i in f:
                 self.training.append([format_sentence(i), 'neg'])
 

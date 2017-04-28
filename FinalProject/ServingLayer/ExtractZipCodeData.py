@@ -1,9 +1,9 @@
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "94105","90025","00000"
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "all"
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "top25"
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "bottom25"
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "top25bottom25"
-#python ExtractZipCodeData.py "/root/W205 GIT/W205/FinalProject/AnalysisOutput/" "baseline"
+#python ExtractZipCodeData.py "/root/w205/FinalProject/AnalysisOutput/" "94105","90025","00000"
+#python ExtractZipCodeData.py "/root/w205/FinalProject/AnalysisOutput/" "all"
+#python ExtractZipCodeData.py "/root/w205/FinalProject/AnalysisOutput/" "top25"
+#python ExtractZipCodeData.py "/root/w205/FinalProject/AnalysisOutput/" "bottom25"
+#python ExtractZipCodeData.py "/root/w205/FinalProject/AnalysisOutput/" "top25bottom25"
+#python ExtractZipCodeData.py "/root/w205/FinalProject/AnalysisOutput/" "baseline"
 
 import sys
 import psycopg2
